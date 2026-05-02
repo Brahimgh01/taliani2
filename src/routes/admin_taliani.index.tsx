@@ -29,23 +29,25 @@ function AdminLogin() {
       password,
     });
 
-    setLoading(false);
-
     if (error) {
+      setLoading(false);
       toast.error(error.message);
       return;
     }
 
     const user = data.user;
 
-    const { data: isAdmin, error: roleError } = await supabase.rpc("has_role", {
-      user_id: user.id,
-      role: "admin",
-    });
+    // Query user_roles directly instead of relying on RPC param names
+    const { data: roleRow, error: roleError } = await supabase
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", user.id)
+      .eq("role", "admin")
+      .maybeSingle();
 
-    console.log("isAdmin:", isAdmin, "roleError:", roleError);
+    setLoading(false);
 
-    if (roleError || !isAdmin) {
+    if (roleError || !roleRow) {
       toast.error("You are not admin");
       await supabase.auth.signOut();
       return;
