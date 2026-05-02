@@ -152,7 +152,7 @@ function ProductEditor({ initial, onClose }: { initial: any; onClose: () => void
   );
 }
 
-function Field({ label, value, onChange, type = "text" }: any) {
+function Field({ label, value, onChange, type = "text" }: { label: string; value: any; onChange: (v: string) => void; type?: string }) {
   return (
     <div>
       <label className="text-eyebrow opacity-60 block mb-1">{label}</label>
@@ -160,7 +160,7 @@ function Field({ label, value, onChange, type = "text" }: any) {
     </div>
   );
 }
-function Area({ label, value, onChange }: any) {
+function Area({ label, value, onChange }: { label: string; value: string; onChange: (v: string) => void }) {
   return (
     <div className="mb-4">
       <label className="text-eyebrow opacity-60 block mb-1">{label}</label>
