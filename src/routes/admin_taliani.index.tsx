@@ -35,9 +35,17 @@ function AdminLogin() {
       return;
     }
 
+    // Explicitly set the session so the next RPC call includes the JWT
+    await supabase.auth.setSession({
+      access_token: data.session.access_token,
+      refresh_token: data.session.refresh_token,
+    });
+
     const { data: role, error: roleError } = await supabase.rpc("get_my_role");
 
     setLoading(false);
+
+    console.log("role:", role, "roleError:", roleError);
 
     if (roleError || role !== "admin") {
       toast.error("You are not admin");
