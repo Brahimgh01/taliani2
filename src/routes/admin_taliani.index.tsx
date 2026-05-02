@@ -35,19 +35,11 @@ function AdminLogin() {
       return;
     }
 
-    const user = data.user;
-
-    // Query user_roles directly instead of relying on RPC param names
-    const { data: roleRow, error: roleError } = await supabase
-      .from("user_roles")
-      .select("role")
-      .eq("user_id", user.id)
-      .eq("role", "admin")
-      .maybeSingle();
+    const { data: role, error: roleError } = await supabase.rpc("get_my_role");
 
     setLoading(false);
 
-    if (roleError || !roleRow) {
+    if (roleError || role !== "admin") {
       toast.error("You are not admin");
       await supabase.auth.signOut();
       return;
