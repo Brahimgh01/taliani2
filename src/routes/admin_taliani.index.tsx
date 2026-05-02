@@ -21,13 +21,36 @@ function AdminLogin() {
   }, [nav]);
 
   const submit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    setLoading(false);
-    if (error) { toast.error(error.message); return; }
-    nav({ to: "/admin_taliani/dashboard" });
-  };
+  e.preventDefault();
+  setLoading(true);
+
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  setLoading(false);
+
+  if (error) {
+    toast.error(error.message);
+    return;
+  }
+
+  const user = data.user;
+
+  const { data: isAdmin } = await supabase.rpc("has_role", {
+    _user_id: user.id,
+    _role: "admin"
+  });
+
+  if (!isAdmin) {
+    toast.error("You are not admin");
+    await supabase.auth.signOut();
+    return;
+  }
+
+  nav({ to: "/admin_taliani/dashboard" });
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-paper px-6">
