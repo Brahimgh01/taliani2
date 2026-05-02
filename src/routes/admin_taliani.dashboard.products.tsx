@@ -108,7 +108,17 @@ function ProductEditor({ initial, onClose }: { initial: any; onClose: () => void
 
         <div className="grid grid-cols-2 gap-4">
           <Field label="Slug *" value={form.slug} onChange={(v) => setForm({ ...form, slug: v })} />
-          <Field label="Category" value={form.category} onChange={(v) => setForm({ ...form, category: v })} />
+          <div>
+            <label className="text-eyebrow opacity-60 block mb-1">Category</label>
+            <select value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} className="w-full bg-transparent border border-border px-3 py-2 outline-none focus:border-foreground">
+              <option value="tops">Tops</option>
+              <option value="outerwear">Outerwear</option>
+              <option value="bottoms">Bottoms</option>
+              <option value="accessories">Accessories</option>
+              <option value="dresses">Dresses</option>
+              <option value="shoes">Shoes</option>
+            </select>
+          </div>
           <Field label="Name (EN) *" value={form.name_en} onChange={(v) => setForm({ ...form, name_en: v })} />
           <Field label="Name (FR)" value={form.name_fr || ""} onChange={(v) => setForm({ ...form, name_fr: v })} />
           <Field label="Name (AR)" value={form.name_ar || ""} onChange={(v) => setForm({ ...form, name_ar: v })} />
