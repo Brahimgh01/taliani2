@@ -18,8 +18,11 @@ function AdminLayout() {
     const check = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) { nav({ to: "/admin_taliani" }); return; }
-      const { data: roles } = await supabase.from("user_roles").select("role").eq("user_id", session.user.id);
-      const admin = !!roles?.some((r) => r.role === "admin");
+
+      // Use the security definer RPC instead of querying user_roles directly
+      const { data: role } = await supabase.rpc("get_my_role");
+      const admin = role === "admin";
+
       if (!mounted) return;
       setIsAdmin(admin);
       setReady(true);
