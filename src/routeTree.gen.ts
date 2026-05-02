@@ -14,7 +14,9 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as Admin_talianiIndexRouteImport } from './routes/admin_taliani.index'
 import { Route as ProductSlugRouteImport } from './routes/product.$slug'
+import { Route as Admin_talianiDashboardRouteImport } from './routes/admin_taliani.dashboard'
 
 const ShopRoute = ShopRouteImport.update({
   id: '/shop',
@@ -41,9 +43,19 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Admin_talianiIndexRoute = Admin_talianiIndexRouteImport.update({
+  id: '/admin_taliani/',
+  path: '/admin_taliani/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProductSlugRoute = ProductSlugRouteImport.update({
   id: '/product/$slug',
   path: '/product/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Admin_talianiDashboardRoute = Admin_talianiDashboardRouteImport.update({
+  id: '/admin_taliani/dashboard',
+  path: '/admin_taliani/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -53,7 +65,9 @@ export interface FileRoutesByFullPath {
   '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
   '/shop': typeof ShopRoute
+  '/admin_taliani/dashboard': typeof Admin_talianiDashboardRoute
   '/product/$slug': typeof ProductSlugRoute
+  '/admin_taliani/': typeof Admin_talianiIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -61,7 +75,9 @@ export interface FileRoutesByTo {
   '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
   '/shop': typeof ShopRoute
+  '/admin_taliani/dashboard': typeof Admin_talianiDashboardRoute
   '/product/$slug': typeof ProductSlugRoute
+  '/admin_taliani': typeof Admin_talianiIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -70,13 +86,31 @@ export interface FileRoutesById {
   '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
   '/shop': typeof ShopRoute
+  '/admin_taliani/dashboard': typeof Admin_talianiDashboardRoute
   '/product/$slug': typeof ProductSlugRoute
+  '/admin_taliani/': typeof Admin_talianiIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/cart' | '/contact' | '/shop' | '/product/$slug'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/cart'
+    | '/contact'
+    | '/shop'
+    | '/admin_taliani/dashboard'
+    | '/product/$slug'
+    | '/admin_taliani/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/cart' | '/contact' | '/shop' | '/product/$slug'
+  to:
+    | '/'
+    | '/about'
+    | '/cart'
+    | '/contact'
+    | '/shop'
+    | '/admin_taliani/dashboard'
+    | '/product/$slug'
+    | '/admin_taliani'
   id:
     | '__root__'
     | '/'
@@ -84,7 +118,9 @@ export interface FileRouteTypes {
     | '/cart'
     | '/contact'
     | '/shop'
+    | '/admin_taliani/dashboard'
     | '/product/$slug'
+    | '/admin_taliani/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -93,7 +129,9 @@ export interface RootRouteChildren {
   CartRoute: typeof CartRoute
   ContactRoute: typeof ContactRoute
   ShopRoute: typeof ShopRoute
+  Admin_talianiDashboardRoute: typeof Admin_talianiDashboardRoute
   ProductSlugRoute: typeof ProductSlugRoute
+  Admin_talianiIndexRoute: typeof Admin_talianiIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -133,11 +171,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin_taliani/': {
+      id: '/admin_taliani/'
+      path: '/admin_taliani'
+      fullPath: '/admin_taliani/'
+      preLoaderRoute: typeof Admin_talianiIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/product/$slug': {
       id: '/product/$slug'
       path: '/product/$slug'
       fullPath: '/product/$slug'
       preLoaderRoute: typeof ProductSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin_taliani/dashboard': {
+      id: '/admin_taliani/dashboard'
+      path: '/admin_taliani/dashboard'
+      fullPath: '/admin_taliani/dashboard'
+      preLoaderRoute: typeof Admin_talianiDashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -149,7 +201,9 @@ const rootRouteChildren: RootRouteChildren = {
   CartRoute: CartRoute,
   ContactRoute: ContactRoute,
   ShopRoute: ShopRoute,
+  Admin_talianiDashboardRoute: Admin_talianiDashboardRoute,
   ProductSlugRoute: ProductSlugRoute,
+  Admin_talianiIndexRoute: Admin_talianiIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
