@@ -9,38 +9,237 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ShopRouteImport } from './routes/shop'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CartRouteImport } from './routes/cart'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as Admin_talianiIndexRouteImport } from './routes/admin_taliani.index'
+import { Route as ProductSlugRouteImport } from './routes/product.$slug'
+import { Route as Admin_talianiDashboardRouteImport } from './routes/admin_taliani.dashboard'
+import { Route as Admin_talianiDashboardIndexRouteImport } from './routes/admin_taliani.dashboard.index'
+import { Route as Admin_talianiDashboardSocialsRouteImport } from './routes/admin_taliani.dashboard.socials'
+import { Route as Admin_talianiDashboardSettingsRouteImport } from './routes/admin_taliani.dashboard.settings'
+import { Route as Admin_talianiDashboardRequestsRouteImport } from './routes/admin_taliani.dashboard.requests'
+import { Route as Admin_talianiDashboardPromotionsRouteImport } from './routes/admin_taliani.dashboard.promotions'
+import { Route as Admin_talianiDashboardProductsRouteImport } from './routes/admin_taliani.dashboard.products'
 
+const ShopRoute = ShopRouteImport.update({
+  id: '/shop',
+  path: '/shop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CartRoute = CartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Admin_talianiIndexRoute = Admin_talianiIndexRouteImport.update({
+  id: '/admin_taliani/',
+  path: '/admin_taliani/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductSlugRoute = ProductSlugRouteImport.update({
+  id: '/product/$slug',
+  path: '/product/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Admin_talianiDashboardRoute = Admin_talianiDashboardRouteImport.update({
+  id: '/admin_taliani/dashboard',
+  path: '/admin_taliani/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Admin_talianiDashboardIndexRoute =
+  Admin_talianiDashboardIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => Admin_talianiDashboardRoute,
+  } as any)
+const Admin_talianiDashboardSocialsRoute =
+  Admin_talianiDashboardSocialsRouteImport.update({
+    id: '/socials',
+    path: '/socials',
+    getParentRoute: () => Admin_talianiDashboardRoute,
+  } as any)
+const Admin_talianiDashboardSettingsRoute =
+  Admin_talianiDashboardSettingsRouteImport.update({
+    id: '/settings',
+    path: '/settings',
+    getParentRoute: () => Admin_talianiDashboardRoute,
+  } as any)
+const Admin_talianiDashboardRequestsRoute =
+  Admin_talianiDashboardRequestsRouteImport.update({
+    id: '/requests',
+    path: '/requests',
+    getParentRoute: () => Admin_talianiDashboardRoute,
+  } as any)
+const Admin_talianiDashboardPromotionsRoute =
+  Admin_talianiDashboardPromotionsRouteImport.update({
+    id: '/promotions',
+    path: '/promotions',
+    getParentRoute: () => Admin_talianiDashboardRoute,
+  } as any)
+const Admin_talianiDashboardProductsRoute =
+  Admin_talianiDashboardProductsRouteImport.update({
+    id: '/products',
+    path: '/products',
+    getParentRoute: () => Admin_talianiDashboardRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/cart': typeof CartRoute
+  '/contact': typeof ContactRoute
+  '/shop': typeof ShopRoute
+  '/admin_taliani/dashboard': typeof Admin_talianiDashboardRouteWithChildren
+  '/product/$slug': typeof ProductSlugRoute
+  '/admin_taliani/': typeof Admin_talianiIndexRoute
+  '/admin_taliani/dashboard/products': typeof Admin_talianiDashboardProductsRoute
+  '/admin_taliani/dashboard/promotions': typeof Admin_talianiDashboardPromotionsRoute
+  '/admin_taliani/dashboard/requests': typeof Admin_talianiDashboardRequestsRoute
+  '/admin_taliani/dashboard/settings': typeof Admin_talianiDashboardSettingsRoute
+  '/admin_taliani/dashboard/socials': typeof Admin_talianiDashboardSocialsRoute
+  '/admin_taliani/dashboard/': typeof Admin_talianiDashboardIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/cart': typeof CartRoute
+  '/contact': typeof ContactRoute
+  '/shop': typeof ShopRoute
+  '/product/$slug': typeof ProductSlugRoute
+  '/admin_taliani': typeof Admin_talianiIndexRoute
+  '/admin_taliani/dashboard/products': typeof Admin_talianiDashboardProductsRoute
+  '/admin_taliani/dashboard/promotions': typeof Admin_talianiDashboardPromotionsRoute
+  '/admin_taliani/dashboard/requests': typeof Admin_talianiDashboardRequestsRoute
+  '/admin_taliani/dashboard/settings': typeof Admin_talianiDashboardSettingsRoute
+  '/admin_taliani/dashboard/socials': typeof Admin_talianiDashboardSocialsRoute
+  '/admin_taliani/dashboard': typeof Admin_talianiDashboardIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/cart': typeof CartRoute
+  '/contact': typeof ContactRoute
+  '/shop': typeof ShopRoute
+  '/admin_taliani/dashboard': typeof Admin_talianiDashboardRouteWithChildren
+  '/product/$slug': typeof ProductSlugRoute
+  '/admin_taliani/': typeof Admin_talianiIndexRoute
+  '/admin_taliani/dashboard/products': typeof Admin_talianiDashboardProductsRoute
+  '/admin_taliani/dashboard/promotions': typeof Admin_talianiDashboardPromotionsRoute
+  '/admin_taliani/dashboard/requests': typeof Admin_talianiDashboardRequestsRoute
+  '/admin_taliani/dashboard/settings': typeof Admin_talianiDashboardSettingsRoute
+  '/admin_taliani/dashboard/socials': typeof Admin_talianiDashboardSocialsRoute
+  '/admin_taliani/dashboard/': typeof Admin_talianiDashboardIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/cart'
+    | '/contact'
+    | '/shop'
+    | '/admin_taliani/dashboard'
+    | '/product/$slug'
+    | '/admin_taliani/'
+    | '/admin_taliani/dashboard/products'
+    | '/admin_taliani/dashboard/promotions'
+    | '/admin_taliani/dashboard/requests'
+    | '/admin_taliani/dashboard/settings'
+    | '/admin_taliani/dashboard/socials'
+    | '/admin_taliani/dashboard/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/cart'
+    | '/contact'
+    | '/shop'
+    | '/product/$slug'
+    | '/admin_taliani'
+    | '/admin_taliani/dashboard/products'
+    | '/admin_taliani/dashboard/promotions'
+    | '/admin_taliani/dashboard/requests'
+    | '/admin_taliani/dashboard/settings'
+    | '/admin_taliani/dashboard/socials'
+    | '/admin_taliani/dashboard'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/cart'
+    | '/contact'
+    | '/shop'
+    | '/admin_taliani/dashboard'
+    | '/product/$slug'
+    | '/admin_taliani/'
+    | '/admin_taliani/dashboard/products'
+    | '/admin_taliani/dashboard/promotions'
+    | '/admin_taliani/dashboard/requests'
+    | '/admin_taliani/dashboard/settings'
+    | '/admin_taliani/dashboard/socials'
+    | '/admin_taliani/dashboard/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  CartRoute: typeof CartRoute
+  ContactRoute: typeof ContactRoute
+  ShopRoute: typeof ShopRoute
+  Admin_talianiDashboardRoute: typeof Admin_talianiDashboardRouteWithChildren
+  ProductSlugRoute: typeof ProductSlugRoute
+  Admin_talianiIndexRoute: typeof Admin_talianiIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/shop': {
+      id: '/shop'
+      path: '/shop'
+      fullPath: '/shop'
+      preLoaderRoute: typeof ShopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cart': {
+      id: '/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof CartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,12 +247,116 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin_taliani/': {
+      id: '/admin_taliani/'
+      path: '/admin_taliani'
+      fullPath: '/admin_taliani/'
+      preLoaderRoute: typeof Admin_talianiIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/product/$slug': {
+      id: '/product/$slug'
+      path: '/product/$slug'
+      fullPath: '/product/$slug'
+      preLoaderRoute: typeof ProductSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin_taliani/dashboard': {
+      id: '/admin_taliani/dashboard'
+      path: '/admin_taliani/dashboard'
+      fullPath: '/admin_taliani/dashboard'
+      preLoaderRoute: typeof Admin_talianiDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin_taliani/dashboard/': {
+      id: '/admin_taliani/dashboard/'
+      path: '/'
+      fullPath: '/admin_taliani/dashboard/'
+      preLoaderRoute: typeof Admin_talianiDashboardIndexRouteImport
+      parentRoute: typeof Admin_talianiDashboardRoute
+    }
+    '/admin_taliani/dashboard/socials': {
+      id: '/admin_taliani/dashboard/socials'
+      path: '/socials'
+      fullPath: '/admin_taliani/dashboard/socials'
+      preLoaderRoute: typeof Admin_talianiDashboardSocialsRouteImport
+      parentRoute: typeof Admin_talianiDashboardRoute
+    }
+    '/admin_taliani/dashboard/settings': {
+      id: '/admin_taliani/dashboard/settings'
+      path: '/settings'
+      fullPath: '/admin_taliani/dashboard/settings'
+      preLoaderRoute: typeof Admin_talianiDashboardSettingsRouteImport
+      parentRoute: typeof Admin_talianiDashboardRoute
+    }
+    '/admin_taliani/dashboard/requests': {
+      id: '/admin_taliani/dashboard/requests'
+      path: '/requests'
+      fullPath: '/admin_taliani/dashboard/requests'
+      preLoaderRoute: typeof Admin_talianiDashboardRequestsRouteImport
+      parentRoute: typeof Admin_talianiDashboardRoute
+    }
+    '/admin_taliani/dashboard/promotions': {
+      id: '/admin_taliani/dashboard/promotions'
+      path: '/promotions'
+      fullPath: '/admin_taliani/dashboard/promotions'
+      preLoaderRoute: typeof Admin_talianiDashboardPromotionsRouteImport
+      parentRoute: typeof Admin_talianiDashboardRoute
+    }
+    '/admin_taliani/dashboard/products': {
+      id: '/admin_taliani/dashboard/products'
+      path: '/products'
+      fullPath: '/admin_taliani/dashboard/products'
+      preLoaderRoute: typeof Admin_talianiDashboardProductsRouteImport
+      parentRoute: typeof Admin_talianiDashboardRoute
+    }
   }
 }
 
+interface Admin_talianiDashboardRouteChildren {
+  Admin_talianiDashboardProductsRoute: typeof Admin_talianiDashboardProductsRoute
+  Admin_talianiDashboardPromotionsRoute: typeof Admin_talianiDashboardPromotionsRoute
+  Admin_talianiDashboardRequestsRoute: typeof Admin_talianiDashboardRequestsRoute
+  Admin_talianiDashboardSettingsRoute: typeof Admin_talianiDashboardSettingsRoute
+  Admin_talianiDashboardSocialsRoute: typeof Admin_talianiDashboardSocialsRoute
+  Admin_talianiDashboardIndexRoute: typeof Admin_talianiDashboardIndexRoute
+}
+
+const Admin_talianiDashboardRouteChildren: Admin_talianiDashboardRouteChildren =
+  {
+    Admin_talianiDashboardProductsRoute: Admin_talianiDashboardProductsRoute,
+    Admin_talianiDashboardPromotionsRoute:
+      Admin_talianiDashboardPromotionsRoute,
+    Admin_talianiDashboardRequestsRoute: Admin_talianiDashboardRequestsRoute,
+    Admin_talianiDashboardSettingsRoute: Admin_talianiDashboardSettingsRoute,
+    Admin_talianiDashboardSocialsRoute: Admin_talianiDashboardSocialsRoute,
+    Admin_talianiDashboardIndexRoute: Admin_talianiDashboardIndexRoute,
+  }
+
+const Admin_talianiDashboardRouteWithChildren =
+  Admin_talianiDashboardRoute._addFileChildren(
+    Admin_talianiDashboardRouteChildren,
+  )
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  CartRoute: CartRoute,
+  ContactRoute: ContactRoute,
+  ShopRoute: ShopRoute,
+  Admin_talianiDashboardRoute: Admin_talianiDashboardRouteWithChildren,
+  ProductSlugRoute: ProductSlugRoute,
+  Admin_talianiIndexRoute: Admin_talianiIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
