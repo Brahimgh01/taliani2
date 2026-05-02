@@ -21,36 +21,38 @@ function AdminLogin() {
   }, [nav]);
 
   const submit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setLoading(true);
+    e.preventDefault();
+    setLoading(true);
 
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email,
-    password
-  });
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
 
-  setLoading(false);
+    setLoading(false);
 
-  if (error) {
-    toast.error(error.message);
-    return;
-  }
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
 
-  const user = data.user;
+    const user = data.user;
 
-  const { data: isAdmin } = await supabase.rpc("has_role", {
-    _user_id: user.id,
-    _role: "admin"
-  });
+    const { data: isAdmin, error: roleError } = await supabase.rpc("has_role", {
+      user_id: user.id,
+      role: "admin",
+    });
 
-  if (!isAdmin) {
-    toast.error("You are not admin");
-    await supabase.auth.signOut();
-    return;
-  }
+    console.log("isAdmin:", isAdmin, "roleError:", roleError);
 
-  nav({ to: "/admin_taliani/dashboard" });
-};
+    if (roleError || !isAdmin) {
+      toast.error("You are not admin");
+      await supabase.auth.signOut();
+      return;
+    }
+
+    nav({ to: "/admin_taliani/dashboard" });
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-paper px-6">
@@ -60,13 +62,29 @@ function AdminLogin() {
         <div className="space-y-6">
           <div>
             <label className="text-eyebrow opacity-60 block mb-2">Email</label>
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required className="w-full bg-transparent border-b border-foreground/30 focus:border-foreground outline-none py-3" />
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="w-full bg-transparent border-b border-foreground/30 focus:border-foreground outline-none py-3"
+            />
           </div>
           <div>
             <label className="text-eyebrow opacity-60 block mb-2">Password</label>
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required className="w-full bg-transparent border-b border-foreground/30 focus:border-foreground outline-none py-3" />
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="w-full bg-transparent border-b border-foreground/30 focus:border-foreground outline-none py-3"
+            />
           </div>
-          <button type="submit" disabled={loading} className="w-full bg-ink text-paper py-4 text-eyebrow hover:opacity-80 disabled:opacity-50">
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-ink text-paper py-4 text-eyebrow hover:opacity-80 disabled:opacity-50"
+          >
             {loading ? "..." : "Sign in →"}
           </button>
         </div>
